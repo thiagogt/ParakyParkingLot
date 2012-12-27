@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="paraky.mapper.ClientesMapper" >
+  <resultMap id="BaseResultMap" type="paraky.domain.Clientes" >
+    <id column="id_cliente" property="idCliente" jdbcType="INTEGER" />
+    <result column="nome" property="nome" jdbcType="VARCHAR" />
+    <result column="sobrenome" property="sobrenome" jdbcType="VARCHAR" />
+    <result column="titular_da_vaga" property="titularDaVaga" jdbcType="BIT" />
+    <result column="aniversario" property="aniversario" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id_cliente, nome, sobrenome, titular_da_vaga, aniversario
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="paraky.domain.ClientesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from public.clientes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from public.clientes
+    where id_cliente = #{idCliente,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from public.clientes
+    where id_cliente = #{idCliente,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="paraky.domain.ClientesExample" >
+    delete from public.clientes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="paraky.domain.Clientes" >
+    insert into public.clientes (id_cliente, nome, sobrenome, 
+      titular_da_vaga, aniversario)
+    values (#{idCliente,jdbcType=INTEGER}, #{nome,jdbcType=VARCHAR}, #{sobrenome,jdbcType=VARCHAR}, 
+      #{titularDaVaga,jdbcType=BIT}, #{aniversario,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="paraky.domain.Clientes" >
+    insert into public.clientes
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idCliente != null" >
+        id_cliente,
+      </if>
+      <if test="nome != null" >
+        nome,
+      </if>
+      <if test="sobrenome != null" >
+        sobrenome,
+      </if>
+      <if test="titularDaVaga != null" >
+        titular_da_vaga,
+      </if>
+      <if test="aniversario != null" >
+        aniversario,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idCliente != null" >
+        #{idCliente,jdbcType=INTEGER},
+      </if>
+      <if test="nome != null" >
+        #{nome,jdbcType=VARCHAR},
+      </if>
+      <if test="sobrenome != null" >
+        #{sobrenome,jdbcType=VARCHAR},
+      </if>
+      <if test="titularDaVaga != null" >
+        #{titularDaVaga,jdbcType=BIT},
+      </if>
+      <if test="aniversario != null" >
+        #{aniversario,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="paraky.domain.ClientesExample" resultType="java.lang.Integer" >
+    select count(*) from public.clientes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update public.clientes
+    <set >
+      <if test="record.idCliente != null" >
+        id_cliente = #{record.idCliente,jdbcType=INTEGER},
+      </if>
+      <if test="record.nome != null" >
+        nome = #{record.nome,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sobrenome != null" >
+        sobrenome = #{record.sobrenome,jdbcType=VARCHAR},
+      </if>
+      <if test="record.titularDaVaga != null" >
+        titular_da_vaga = #{record.titularDaVaga,jdbcType=BIT},
+      </if>
+      <if test="record.aniversario != null" >
+        aniversario = #{record.aniversario,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update public.clientes
+    set id_cliente = #{record.idCliente,jdbcType=INTEGER},
+      nome = #{record.nome,jdbcType=VARCHAR},
+      sobrenome = #{record.sobrenome,jdbcType=VARCHAR},
+      titular_da_vaga = #{record.titularDaVaga,jdbcType=BIT},
+      aniversario = #{record.aniversario,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="paraky.domain.Clientes" >
+    update public.clientes
+    <set >
+      <if test="nome != null" >
+        nome = #{nome,jdbcType=VARCHAR},
+      </if>
+      <if test="sobrenome != null" >
+        sobrenome = #{sobrenome,jdbcType=VARCHAR},
+      </if>
+      <if test="titularDaVaga != null" >
+        titular_da_vaga = #{titularDaVaga,jdbcType=BIT},
+      </if>
+      <if test="aniversario != null" >
+        aniversario = #{aniversario,jdbcType=DATE},
+      </if>
+    </set>
+    where id_cliente = #{idCliente,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="paraky.domain.Clientes" >
+    update public.clientes
+    set nome = #{nome,jdbcType=VARCHAR},
+      sobrenome = #{sobrenome,jdbcType=VARCHAR},
+      titular_da_vaga = #{titularDaVaga,jdbcType=BIT},
+      aniversario = #{aniversario,jdbcType=DATE}
+    where id_cliente = #{idCliente,jdbcType=INTEGER}
+  </update>
+</mapper>

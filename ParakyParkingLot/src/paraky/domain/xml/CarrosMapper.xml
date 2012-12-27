@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="paraky.mapper.CarrosMapper" >
+  <resultMap id="BaseResultMap" type="paraky.domain.Carros" >
+    <id column="id_carro" property="idCarro" jdbcType="INTEGER" />
+    <result column="placa" property="placa" jdbcType="VARCHAR" />
+    <result column="cor" property="cor" jdbcType="VARCHAR" />
+    <result column="modelo" property="modelo" jdbcType="VARCHAR" />
+    <result column="marca" property="marca" jdbcType="VARCHAR" />
+    <result column="ano" property="ano" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id_carro, placa, cor, modelo, marca, ano
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="paraky.domain.CarrosExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from public.carros
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from public.carros
+    where id_carro = #{idCarro,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from public.carros
+    where id_carro = #{idCarro,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="paraky.domain.CarrosExample" >
+    delete from public.carros
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="paraky.domain.Carros" >
+    insert into public.carros (id_carro, placa, cor, 
+      modelo, marca, ano)
+    values (#{idCarro,jdbcType=INTEGER}, #{placa,jdbcType=VARCHAR}, #{cor,jdbcType=VARCHAR}, 
+      #{modelo,jdbcType=VARCHAR}, #{marca,jdbcType=VARCHAR}, #{ano,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="paraky.domain.Carros" >
+    insert into public.carros
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idCarro != null" >
+        id_carro,
+      </if>
+      <if test="placa != null" >
+        placa,
+      </if>
+      <if test="cor != null" >
+        cor,
+      </if>
+      <if test="modelo != null" >
+        modelo,
+      </if>
+      <if test="marca != null" >
+        marca,
+      </if>
+      <if test="ano != null" >
+        ano,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idCarro != null" >
+        #{idCarro,jdbcType=INTEGER},
+      </if>
+      <if test="placa != null" >
+        #{placa,jdbcType=VARCHAR},
+      </if>
+      <if test="cor != null" >
+        #{cor,jdbcType=VARCHAR},
+      </if>
+      <if test="modelo != null" >
+        #{modelo,jdbcType=VARCHAR},
+      </if>
+      <if test="marca != null" >
+        #{marca,jdbcType=VARCHAR},
+      </if>
+      <if test="ano != null" >
+        #{ano,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="paraky.domain.CarrosExample" resultType="java.lang.Integer" >
+    select count(*) from public.carros
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update public.carros
+    <set >
+      <if test="record.idCarro != null" >
+        id_carro = #{record.idCarro,jdbcType=INTEGER},
+      </if>
+      <if test="record.placa != null" >
+        placa = #{record.placa,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cor != null" >
+        cor = #{record.cor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelo != null" >
+        modelo = #{record.modelo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marca != null" >
+        marca = #{record.marca,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ano != null" >
+        ano = #{record.ano,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update public.carros
+    set id_carro = #{record.idCarro,jdbcType=INTEGER},
+      placa = #{record.placa,jdbcType=VARCHAR},
+      cor = #{record.cor,jdbcType=VARCHAR},
+      modelo = #{record.modelo,jdbcType=VARCHAR},
+      marca = #{record.marca,jdbcType=VARCHAR},
+      ano = #{record.ano,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="paraky.domain.Carros" >
+    update public.carros
+    <set >
+      <if test="placa != null" >
+        placa = #{placa,jdbcType=VARCHAR},
+      </if>
+      <if test="cor != null" >
+        cor = #{cor,jdbcType=VARCHAR},
+      </if>
+      <if test="modelo != null" >
+        modelo = #{modelo,jdbcType=VARCHAR},
+      </if>
+      <if test="marca != null" >
+        marca = #{marca,jdbcType=VARCHAR},
+      </if>
+      <if test="ano != null" >
+        ano = #{ano,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id_carro = #{idCarro,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="paraky.domain.Carros" >
+    update public.carros
+    set placa = #{placa,jdbcType=VARCHAR},
+      cor = #{cor,jdbcType=VARCHAR},
+      modelo = #{modelo,jdbcType=VARCHAR},
+      marca = #{marca,jdbcType=VARCHAR},
+      ano = #{ano,jdbcType=INTEGER}
+    where id_carro = #{idCarro,jdbcType=INTEGER}
+  </update>
+</mapper>

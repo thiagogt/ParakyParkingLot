@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+  <configuration>
+    <!-- Setup the transaction manager and data source that are
+         appropriate for your environment
+    -->
+    <environments default="development">
+      <environment id="development">
+        <transactionManager type="JDBC">
+        </transactionManager>
+         <dataSource type="POOLED">
+
+<property name="driver" value="org.postgresql.Driver" ></property>
+
+<property name="url" value="jdbc:postgresql://localhost:5432/parakyParkingLot" />
+
+<property name="username" value="postgres" />
+
+<property name="password" value="postgres" />
+
+</dataSource>
+     </environment> 
+    </environments>
+
+    <mappers>
+      <!-- XML mapper files should be listed here -->
+      <mapper resource="paraky/domain/xml/CarrosMapper.xml" />
+      <mapper resource="paraky/domain/xml/FamiliasMapper.xml" />
+      <mapper resource="paraky/domain/xml/ClientesMapper.xml" />
+      <mapper resource="paraky/domain/xml/BoletosMapper.xml" />
+      <mapper resource="paraky/domain/xml/ClienteCarroMapper.xml" />
+      <mapper resource="paraky/domain/xml/ClienteFamiliaMapper.xml" />
+      
+    </mappers>
+
+  </configuration>
