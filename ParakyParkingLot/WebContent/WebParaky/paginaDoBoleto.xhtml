@@ -14,25 +14,9 @@
 	</h:head>
 	<ui:composition template="template/parakyTemplate.xhtml">
 	 <ui:define name="conteudo">
-		<h2>Boletos Pagos</h2>
-	 	<p:accordionPanel value="#{boletos.doDia}" var="boleto" multiple="true">  
-		    
-		    <p:tab title="#{boleto.idFamilia}">  
-		          <h:outputText value="Titular da vaga: "/>
-		          <h:outputText value="#{boleto.idFamilia}"/>
-		          <br/>
-		          
-		          
-		          
-		          <h:outputText value="Pago: "/>
-		          <h:outputText value="#{boleto.boletoPago}"/>
-		           <br/>
-		           <br/>   
-		          <p:commandButton value="gerarBoleto" action="#{boletos.gerarBoleto(boleto.idBoleto)}"/>  
-		    </p:tab>  
-		    
-	 	</p:accordionPanel>
-	 	
+		<h:outputText value="#{boletos.idBoleto}"/>
+		<br/>
+	 <p:commandButton value="Voltar" action="boletos.jsf"/><p:commandButton value="Imprimir" />	
 	</ui:define>
 	</ui:composition>
 </html>

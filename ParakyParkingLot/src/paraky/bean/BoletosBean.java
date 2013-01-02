@@ -12,7 +12,14 @@ import paraky.sqlFactory.SQLFactory;
 @ManagedBean(name="boletos")
 public class BoletosBean {
 	ArrayList<Boletos> doDia;
-
+	Integer idBoleto;
+	
+	
+	public String gerarBoleto(Integer idBoleto){
+		this.idBoleto = idBoleto;
+		return "paginaDoBoleto.xhtml";
+	}
+	
 	public ArrayList<Boletos> getDoDia() {
 		BoletosMapper boletoMapper = SQLFactory.section.getMapper(BoletosMapper.class);
 		Date data = new Date();
@@ -27,5 +34,12 @@ public class BoletosBean {
 		this.doDia = doDia;
 	}
 	
+	public Integer getIdBoleto() {
+		return idBoleto;
+	}
+
+	public void setIdBoleto(Integer idBoleto) {
+		this.idBoleto = idBoleto;
+	}
 	
 }
