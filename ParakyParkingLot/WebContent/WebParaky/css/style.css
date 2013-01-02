@@ -31,7 +31,7 @@ src:  url("http://localhost:8080/ParakyParkingLot/fonts/Kaushan_Script/KaushanSc
 }
 
 .h2Template{
-	color: #4169E1;
+	color: #395383;
 	
 	font-family:"RegencyScriptFLF Regular";
 	margin-top: 104px;
@@ -49,7 +49,7 @@ border-radius:7px;
 }
 
 <!--
-Para gerar um esquema de gradiente para transparencia
+Para gerar um esquema de gradiente para transparencia:
 
 background-image: -moz-linear-gradient( center bottom, rgb(0,0,0) 60%, rgba(0,0,0,0) 75%); 
     background-image:   -o-linear-gradient( rgba(0,0,0,0) 25%, rgb(0,0,0) 40%); 

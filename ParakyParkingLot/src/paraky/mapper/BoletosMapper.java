@@ -1,5 +1,7 @@
 package paraky.mapper;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import paraky.domain.Boletos;
@@ -27,4 +29,6 @@ public interface BoletosMapper {
     int updateByPrimaryKeySelective(Boletos record);
 
     int updateByPrimaryKey(Boletos record);
+
+	ArrayList<Boletos> selectByPayDay(Date dataDoPagamento);
 }

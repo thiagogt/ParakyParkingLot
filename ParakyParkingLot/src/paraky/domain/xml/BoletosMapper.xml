@@ -88,6 +88,14 @@
     from public.boletos
     where id_boleto = #{idBoleto,jdbcType=INTEGER}
   </select>
+  
+  <select id="selectByPayDay" resultMap="BaseResultMap" parameterType="java.util.Date">
+  	select 
+    <include refid="Base_Column_List" />
+    from public.boletos
+    where data_do_pagamento = #{dataDoPagamento,jdbcType=DATE}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from public.boletos
     where id_boleto = #{idBoleto,jdbcType=INTEGER}
