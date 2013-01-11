@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+		
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	 xmlns:ui="http://java.sun.com/jsf/facelets"
+	 xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:p="http://primefaces.org/ui" >
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<script type="text/javascript" src="../jquery-ui-1.8.21.custom/js/jquery-1.7.2.min.js"></script>
+		<title>Paraky</title>
+	</h:head>
+	<ui:composition template="template/parakyTemplate.xhtml">
+	 <ui:define name="conteudo">
+		
+		<p:tabMenu >  
+	    		<p:menuitem value="Boletos do dia" url="boletosDoDia.jsf" icon="ui-icon-star"/>  
+		    	<p:menuitem value="Boletos atrasados" url="caloteiros.jsf" icon="ui-icon-search" />  
+		</p:tabMenu>
+	 	<p:accordionPanel value="#{boletos.doDia}" var="boleto" multiple="true">  
+		    
+		    <p:tab title="#{boleto.idFamilia}">  
+		          <h:outputText value="Titular da vaga: "/>
+		          <h:outputText value="#{boleto.idFamilia}"/>
+		          <br/>
+		          
+		          
+		          
+		          <h:outputText value="Pago: "/>
+		          <h:outputText value="#{boleto.boletoPago}"/>
+		           <br/>
+		           <br/>   
+		          <p:commandButton value="gerarBoleto" action="#{boletos.gerarBoleto(boleto.idBoleto)}"/>  
+		    </p:tab>  
+		    
+	 	</p:accordionPanel>
+	 	
+	</ui:define>
+	</ui:composition>
+</html>

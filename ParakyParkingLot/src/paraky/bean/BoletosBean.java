@@ -2,6 +2,7 @@ package paraky.bean;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 
@@ -11,7 +12,7 @@ import paraky.sqlFactory.SQLFactory;
 
 @ManagedBean(name="boletos")
 public class BoletosBean {
-	ArrayList<Boletos> doDia;
+	List<Boletos> doDia;
 	Integer idBoleto;
 	
 	
@@ -20,12 +21,13 @@ public class BoletosBean {
 		return "paginaDoBoleto.xhtml";
 	}
 	
-	public ArrayList<Boletos> getDoDia() {
+	public List<Boletos> getDoDia() {
 		BoletosMapper boletoMapper = SQLFactory.section.getMapper(BoletosMapper.class);
-		Date data = new Date();
-		
-		ArrayList<Boletos> listaDeBoletos = new ArrayList<Boletos>(); 
-		listaDeBoletos = boletoMapper.selectByPayDay(data);
+		//Date data = new Date();
+		//System.out.println("Essa eh a data: "+data);
+		List<Boletos> listaDeBoletos = new ArrayList<Boletos>(); 
+		//listaDeBoletos = boletoMapper.selectByPayDay(data);
+		listaDeBoletos = boletoMapper.selectByExample(null);
 		doDia = listaDeBoletos;
 		return doDia;
 	}
