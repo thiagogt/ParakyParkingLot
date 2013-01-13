@@ -21,20 +21,24 @@
 		</p:tabMenu>
 	 	<p:accordionPanel value="#{boletos.doDia}" var="boleto" multiple="true">  
 		    
-		    <p:tab title="#{boleto.idFamilia}">  
+		    <p:tab   title="#{boletos.idFamiliaParaNomeFamiliaConverter(boleto.idFamilia)}" id="titulo" >  
+		    	
 		          <h:outputText value="Titular da vaga: "/>
-		          <h:outputText value="#{boleto.idFamilia}"/>
+		          <h:outputText value="#{boleto.idFamilia}">
+		          	<f:converter converterId="idFamiliaParaNomeFamiliaConverter"/>
+		          </h:outputText>
 		          <br/>
 		          
 		          
 		          
 		          <h:outputText value="Pago: "/>
-		          <h:outputText value="#{boleto.boletoPago}"/>
+		          <h:outputText value="#{boleto.boletoPago}">
+		          	<f:converter converterId="booleanToStringConverter"/>
+		          </h:outputText>	
 		           <br/>
 		           <br/>   
-		          <p:commandButton value="gerarBoleto" action="#{boletos.gerarBoleto(boleto.idBoleto)}"/>  
+		          <p:commandButton value="gerarBoleto" onclick="return confirm('Gerar o boleto, implica que o mesmo esta sendo pago!\n Tudo bem?');" action="#{boletos.gerarBoleto(boleto.idBoleto)}"/>
 		    </p:tab>  
-		    
 	 	</p:accordionPanel>
 	 	
 	</ui:define>
